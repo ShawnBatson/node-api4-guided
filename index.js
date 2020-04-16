@@ -1,26 +1,28 @@
-const express = require("express")
-const helmet = require("helmet")
-const cors = require("cors")
-const welcomeRouter = require("./welcome/welcome-router")
-const shoutsRouter = require("./shouts/shouts-router")
+// require("dotenv").config();
 
-const server = express()
-const port = 4000
+const express = require("express");
+const helmet = require("helmet");
+const cors = require("cors");
+const welcomeRouter = require("./welcome/welcome-router");
+const shoutsRouter = require("./shouts/shouts-router");
 
-server.use(express.json())
-server.use(helmet())
-server.use(cors())
+const server = express();
+const port = 4000;
 
-server.use("/", welcomeRouter)
-server.use("/shouts", shoutsRouter)
+server.use(express.json());
+server.use(helmet());
+server.use(cors());
+
+server.use("/", welcomeRouter);
+server.use("/shouts", shoutsRouter);
 
 server.use((err, req, res, next) => {
-	console.log(err)
-	res.status(500).json({
-		message: "Something went wrong",
-	})
-})
+    console.log(err);
+    res.status(500).json({
+        message: "Something went wrong",
+    });
+});
 
 server.listen(port, () => {
-	console.log(`Server running at http://localhost:${port}`)
-})
+    console.log(`Server running at http://localhost:${port}`);
+});
